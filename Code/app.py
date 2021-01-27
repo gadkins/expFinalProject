@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 import psycopg2
 import sqlalchemy
 import config
@@ -10,9 +11,20 @@ import scrape
 from sqlalchemy import create_engine
 from config import password
 
+from flask import Flask, render_template, redirect, jsonify
+
+app=Flask(__name__)
+
+from flask_sqlalchemy import SQLAlchemy
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "postgresql://postgres:Parvin123!!/Employee_Turnover"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
 scrape.scrape_bls()
 
-Engine = create_engine(f"postgresql://postgres:{password}@localhost:5432/Employee_Turnover")
+Engine = create_engine('postgresql://postgres:Parvin123!!@localhost:5432/Employee_Turnover')
 Connection = Engine.connect()
 initial_df=pd.read_sql("select * from turnover_data", Connection)
 bls_df=pd.read_sql("select * from blsdata", Connection)
@@ -42,9 +54,6 @@ columns = list(df)
 factors = ['Age', 'Business Travel', 'Department', 'Commute (Miles)', 'Environment Satisfaction', 'Gender', 
 'Job Involvement', 'Job Level', 'Job Satisfaction', 'Monthly Income', 'Performance Rating', 'Stock Option Level', 
 'Training Last Year']
-
-from flask import Flask, render_template, redirect, jsonify
-app=Flask(__name__)
 
 @app.route("/")
 def index():
