@@ -8,7 +8,6 @@ import numpy as np
 import scrape
 
 from sqlalchemy import create_engine
-from config import password
 
 from flask import Flask, render_template, redirect, jsonify
 
