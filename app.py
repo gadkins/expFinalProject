@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import psycopg2
 import sqlalchemy
-import config
 import json 
 import flask
 import numpy as np
