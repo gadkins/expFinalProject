@@ -1,4 +1,3 @@
-from config import password
 from app.py import df
 # don't forget to update these brackets
 
