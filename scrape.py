@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup as bs
 from splinter import Browser
 from sqlalchemy import create_engine
 import psycopg2
+import chromedriver
 
 url = 'https://www.bls.gov/news.release/archives/jolts_03172020.htm' 
 
