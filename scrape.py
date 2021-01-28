@@ -4,10 +4,8 @@ from bs4 import BeautifulSoup as bs
 from splinter import Browser
 from sqlalchemy import create_engine
 import psycopg2
-import config
 
 url = 'https://www.bls.gov/news.release/archives/jolts_03172020.htm' 
-# url2 = 
 
 def scrape_bls():
     executable_path = {'executable_path': 'chromedriver.exe'}
@@ -19,7 +17,7 @@ def scrape_bls():
     bls_df = bls_df.replace(np.nan, '', regex=True)
 
     from config import password
-    Engine = create_engine(f"postgresql://postgres:{password}@localhost:5432/Employee_Turnover");
+    Engine = create_engine(f"postgresql://postgres:Parvin123!!@localhost:5432/Employee_Turnover");
     connection = Engine.connect();
     postgreSQLTable = "blsdata"
 
